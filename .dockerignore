@@ -1,7 +1,7 @@
-nextapp/node_modules/
-nextapp/.next/
-nextapp/apiCache/translations/
-nextapp/package-lock.json
+node_modules/
+.next/
+apiCache/translations/
+package-lock.json
 docker-compose.yml
 .gitignore
 .git
