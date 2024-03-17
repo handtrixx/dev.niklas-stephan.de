@@ -13,7 +13,13 @@ export async function fetchTranslations(
     .createHash("md5")
     .update(text + source + target)
     .digest("hex");
-  const cacheFile = path.resolve(`./apiCache/translations/${hash}.json`);
+  const cacheDir = path.resolve(`./apiCache/translations`);
+  const cacheFile = path.resolve(`${cacheDir}/${hash}.json`);
+
+  // Create directory if it does not exist
+  if (!fs.existsSync(cacheDir)) {
+    fs.mkdirSync(cacheDir, { recursive: true });
+  }
 
   // Check if cache file exists
   if (fs.existsSync(cacheFile)) {
@@ -47,11 +53,11 @@ export async function fetchTranslations(
   });
   const translations = await response.json();
 
-// Reinsert the original content of <pre> and <code> tags
-const $translated = cheerio.load(translations.translatedText);
-$translated("pre, code").each((index, element) => {
-  $translated(element).text(originalContents[index]);
-});
+  // Reinsert the original content of <pre> and <code> tags
+  const $translated = cheerio.load(translations.translatedText);
+  $translated("pre, code").each((index, element) => {
+    $translated(element).text(originalContents[index]);
+  });
 
   // Save the translated text to cache file
   const translatedText = $translated("body").html(); // Select the <body> tag and get its inner HTML
