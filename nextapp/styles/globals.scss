@@ -1,0 +1,129 @@
+$primary: #EC0E27;
+
+@import "./gutenberg.min.scss";
+@import "~bootstrap/scss/bootstrap";
+
+@font-face {
+  font-family: "Oswald";
+  src: url("/fonts/oswald.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Finger Paint";
+  src: url("/fonts/fingerpaint.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-weight: normal;
+  font-style: normal;
+  src: url("/fonts/opensans.woff") format("woff");
+}
+
+p {
+  word-break: break-word;
+}
+
+:root {
+  --bs-font-sans-serif: "Open Sans";
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #ac1827;
+  --bs-btn-hover-border-color: #ac1827;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #ac1827;
+  --bs-btn-active-border-color: #ac1827;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+}
+
+.btn-outline-primary {
+  --bs-btn-hover-color: #fff;
+  --bs-btn-focus-shadow-rgb: 13, 110, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-bg: transparent;
+  --bs-gradient: none;
+}
+
+h1,
+.navbar-brand,
+.fingerpaint {
+  font-family: "Finger Paint", sans-serif;
+}
+
+.navbar-toggler {
+  transform: rotate(90deg);
+}
+.navbar-toggler.collapsed {
+  animation: rotateAnimation 0.5s linear;
+  transform: rotate(180deg);
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+.navbar-toggler:focus {
+  text-decoration: none;
+  outline: 0;
+  box-shadow: none !important;
+}
+
+.fullscreen {
+  min-height: calc(100vh - 86px) !important;
+}
+
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
+}
+
+.form-control-search {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
+}
+
+.form-control-search:focus {
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  border-color: #ec1327;
+  outline: 0;
+  box-shadow: none;
+}
+
+#input-sorting-dropdown-1,
+#input-language-dropdown-1 {
+  border: none;
+  border-radius: 0;
+}
+
+#input-sorting-dropdown-1:hover,
+#input-language-dropdown-1:hover {
+  color: var(--bs-btn-hover-color);
+  background-color: inherit;
+  border-color: #ec1327;
+}

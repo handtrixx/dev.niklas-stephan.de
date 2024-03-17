@@ -1,0 +1,8 @@
+.wrapper {
+  margin-bottom: 80px;
+}
+
+.navbar {
+  background-color: var(--bs-body-bg);
+  font-size: 1.1rem;
+}

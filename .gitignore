@@ -1,0 +1,8 @@
+nextapp/node_modules/
+nextapp/.next/
+nextapp/apiCache/translations/
+nextapp/apiCache/pages/
+nextapp/apiCache/posts/
+nextapp/apiCache/media/
+nextapp/package-lock.json
+docker-compose.yml

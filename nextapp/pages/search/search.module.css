@@ -1,0 +1,5 @@
+.excerpt {
+    word-break: break-word;
+    max-height: 120px;
+    overflow: hidden;
+}

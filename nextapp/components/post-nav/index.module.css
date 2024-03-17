@@ -1,0 +1,9 @@
+.navIcon {
+    transition: color 0.5s;
+    color: var(--bs-body-secondary);
+
+}
+
+.navIcon:hover {
+    color: var(--bs-primary) !important;
+}

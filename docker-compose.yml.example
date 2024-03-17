@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  nextjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      ports:
+      - 3000:3000
+    restart: unless-stopped
+    volumes:
+      - ./nextapp/:/usr/src/
+    environment:
+      - BACKEND_URL=https://niklas-stephan.de
+      - FRONTEND_URL=https://dev.niklas-stephan.de
