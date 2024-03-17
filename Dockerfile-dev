@@ -20,7 +20,7 @@ USER node
 EXPOSE 3000
 
 # Define the startup command
-CMD ["sh","/usr/src/utils/startup.sh"]
+CMD ["sh","/usr/src/utils/startup-dev.sh"]
 
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=3s \
