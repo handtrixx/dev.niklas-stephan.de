@@ -12,6 +12,8 @@ RUN git clone https://github.com/handtrixx/dev.niklas-stephan.de.git .
 
 # Copy the rest of the application code to the working directory
 RUN chown -R node:node /usr/src
+RUN chmod +x /usr/src/utils/startup-prd.sh
+RUN chmod +x /usr/src/utils/startup-dev.sh
 
 # update npm package manager if required
 RUN npm install -g npm
@@ -19,11 +21,9 @@ RUN npm install -g npm
 # set user to node
 USER node
 
-# Expose the port your app runs on
-EXPOSE 3000
-
 # Define the startup command
 CMD ["sh","/usr/src/utils/startup-prd.sh"]
+#CMD ["tail", "-f", "/dev/null"]
 
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=3s \
