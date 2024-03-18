@@ -34,3 +34,14 @@ yarn dev
 ```
 
 Your blog should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
+
+## ToDo
+
+- Move local translations to Polylang
+- Include Wordpess theme to project
+- Define Colors in Wordpress Backend them Configuration
+- Make all external components optional
+- Versioning
+- Allow other/more languages then DE and EN 
+- Image on Dockerhub?
+- Integrate next.js Incremental Static Regeneration (ISR)
