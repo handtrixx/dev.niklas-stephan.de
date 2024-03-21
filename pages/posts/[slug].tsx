@@ -150,5 +150,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       translations,
       translatedHeadlines,
     },
+    revalidate: 10,
   };
 };

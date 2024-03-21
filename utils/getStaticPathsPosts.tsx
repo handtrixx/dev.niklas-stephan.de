@@ -13,9 +13,9 @@ export async function getStaticPathsPosts() {
     const paths = posts.map((post) => ({
       params: { slug: post.slug },
     }));
-    return { paths, fallback: false };
+    return { paths, fallback: 'blocking' };
   } catch (error) {
     console.error("Failed to get static paths:", error);
-    return { paths: [], fallback: false };
+    return { paths: [], fallback: 'blocking' };
   }
 }

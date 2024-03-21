@@ -37,8 +37,12 @@ Your blog should be up and running on [http://localhost:3000](http://localhost:3
 
 ## ToDo
 
+- Create Wordpress Admin theme
+- Set colors via wp admin theme
 - Move local translations to Polylang
 - Include Wordpess theme to project
+- Get Menus from Wordpress
+- Include Comments from Wordpress
 - Define Colors in Wordpress Backend them Configuration
 - Make all external components optional
 - Versioning
