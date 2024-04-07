@@ -3,13 +3,19 @@ import Image from "next/image";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { EnvelopeFill, Linkedin } from "react-bootstrap-icons";
+import {
+  EnvelopeFill,
+  Linkedin,
+  ChevronDown,
+  ChevronRight,
+} from "react-bootstrap-icons";
 import { useIntl } from "react-intl";
 import Head from "next/head";
 import TopNavigation from "../components/top-navigation";
 import FooterNavigation from "../components/footer-navigation";
 import TreeCv from "../components/landing-page/tree-cv";
 import TreeEducation from "../components/landing-page/tree-education";
+import TreeProjects from "../components/landing-page/tree-projects";
 import TreeTrivia from "../components/landing-page/tree-trivia";
 import TreeHobbies from "../components/landing-page/tree-hobbies";
 
@@ -41,14 +47,18 @@ export default function Page({ dir }) {
       <Head>
         <title>{translate(TITLE_ID)}</title>
       </Head>
-      
+
       <main dir={dir}>
         <Container fluid>
           <TopNavigation />
           <Container fluid="lg">
             <Row className={rowClasses + " fullscreen"}>
               <Col md={6} className="text-center">
-                <CustomImage src="/images/web_edit2.webp" alt="Niklas Stephan" priority />
+                <CustomImage
+                  src="/images/web_edit2.webp"
+                  alt="Niklas Stephan"
+                  priority
+                />
               </Col>
               <Col md={6}>
                 <div className="text-center">
@@ -61,10 +71,21 @@ export default function Page({ dir }) {
                     title="Link zur CV von Niklas Stephan"
                     className="btn btn-lg btn-primary mt-4"
                   >
-                    <span className="fingerpaint text-shadow">
+                    <ChevronDown />
+                    <span className="ms-1 fingerpaint text-shadow">
                       {translate("page.home.button.readMore")}
                     </span>
                   </a>
+                  <Link
+                    href="/blog"
+                    title="Link to Blog"
+                    className="btn btn-lg btn-outline-primary mt-4 ms-2"
+                  >
+                    <ChevronRight />
+                    <span className="ms-1 fingerpaint text-shadow">
+                      {translate("page.home.button.toblog")}
+                    </span>
+                  </Link>
                 </Container>
               </Col>
             </Row>
@@ -88,17 +109,25 @@ export default function Page({ dir }) {
             </Row>
             <Row className={rowClasses}>
               <Col md={6} className="order-2 order-md-1">
-                <TreeTrivia />
+                <TreeProjects />
               </Col>
               <Col md={6} className="text-center order-1 order-md-2">
+                <CustomImage src="/images/projects.webp" alt="Projects" />
+              </Col>
+            </Row>
+            <Row className={rowClasses}>
+              <Col md={6} className="order-2 order-md-2">
+                <TreeTrivia />
+              </Col>
+              <Col md={6} className="text-center order-1 order-md-1">
                 <CustomImage src="/images/vault_web.webp" alt="Trivia" />
               </Col>
             </Row>
             <Row className={rowClasses}>
-              <Col md={6} className="text-center">
+              <Col md={6} className="text-center order-1 order-md-2">
                 <CustomImage src="/images/hobbies_web.webp" alt="Hobbies" />
               </Col>
-              <Col md={6}>
+              <Col md={6} className="order-2 order-md-1">
                 <TreeHobbies />
               </Col>
             </Row>
@@ -113,10 +142,15 @@ export default function Page({ dir }) {
                       <Container className="px-0">
                         <Row>
                           <Col className="col-4 px-0">
-                            <CustomImage src="/images/profile.webp" alt="Niklas Stephan" />
+                            <CustomImage
+                              src="/images/profile.webp"
+                              alt="Niklas Stephan"
+                            />
                           </Col>
                           <Col className="col-8">
-                            <div className="fs-4 card-title">Niklas Stephan</div>
+                            <div className="fs-4 card-title">
+                              Niklas Stephan
+                            </div>
                             <p>Data Architect and Creator</p>
 
                             <p className="card-text pt-3">
@@ -139,7 +173,7 @@ export default function Page({ dir }) {
                               >
                                 <Linkedin />
                                 <span className="ms-2">
-                                linkedin.com/in/niklas-stephan
+                                  linkedin.com/in/niklas-stephan
                                 </span>
                               </Link>
                             </p>
