@@ -180,7 +180,9 @@ async function getAllPostsForHome() {
 
     const posts = await Promise.all(
       page.map(async (element) => {
-        const imageUrl = element.featured_image_url || frontendUrl+"images/screenshot.jpg";
+       // console.log(frontendUrl+"images/screenshot.jpg");
+
+        const imageUrl = element.featured_image_url;
         return {
           id: element.id,
           slug: element.slug,

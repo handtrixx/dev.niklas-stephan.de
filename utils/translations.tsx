@@ -54,15 +54,20 @@ export async function fetchTranslations(
   const translations = await response.json();
 
   // Reinsert the original content of <pre> and <code> tags
-  const $translated = cheerio.load(translations.translatedText);
-  $translated("pre, code").each((index, element) => {
-    $translated(element).text(originalContents[index]);
-  });
+  console.log(translations.translatedText);
+  if (translations.translatedText) {
+    const $translated = cheerio.load(translations.translatedText);
+    $translated("pre, code").each((index, element) => {
+      $translated(element).text(originalContents[index]);
+    });
 
-  // Save the translated text to cache file
-  const translatedText = $translated("body").html(); // Select the <body> tag and get its inner HTML
-  fs.writeFileSync(cacheFile, JSON.stringify(translatedText), "utf8");
+      // Save the translated text to cache file
+    const translatedText = $translated("body").html(); // Select the <body> tag and get its inner HTML
+    fs.writeFileSync(cacheFile, JSON.stringify(translatedText), "utf8");
 
-  // Return only the inner HTML of the <body> tag
-  return translatedText;
+      // Return only the inner HTML of the <body> tag
+    return translatedText;
+  } else {
+    return text;
+  }
 }
