@@ -82,13 +82,9 @@ function MyAppInner({ Component, pageProps }) {
   }, [setLocale]);
 
   // Set the cookie outside of the useEffect hook
-  let secure = false;
-  if (typeof window !== 'undefined') {
-    secure = window.location.protocol === "https:";
-  }
   Cookies.set("locale", locale, {
-    sameSite: secure ? "None" : "Lax",
-    secure: secure,
+    sameSite: "Lax",
+    secure: true,
     path: "/",
   });
   const description =
