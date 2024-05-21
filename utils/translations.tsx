@@ -54,7 +54,6 @@ export async function fetchTranslations(
   const translations = await response.json();
 
   // Reinsert the original content of <pre> and <code> tags
-  console.log(translations.translatedText);
   if (translations.translatedText) {
     const $translated = cheerio.load(translations.translatedText);
     $translated("pre, code").each((index, element) => {
