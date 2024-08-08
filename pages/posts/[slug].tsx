@@ -89,6 +89,7 @@ export default function Post({
               title={title}
               content={content}
               published={postDate}
+              language={lang}
             
             />
           </div>
@@ -114,13 +115,6 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const post = await getPostData(params.slug);
-
-  const sourcelang = post.lang;
-  let targetlang = "en";
-  if (sourcelang === "en") {
-    targetlang = "de";
-  }
-
   return {
     props: {
       ...post,

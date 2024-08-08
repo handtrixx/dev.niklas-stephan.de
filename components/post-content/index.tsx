@@ -11,16 +11,16 @@ interface PostContentProps {
   title: string;
   content: string;
   published: string;
+  language: string;
 }
 
 export default function PostContent({
   title,
   content,
   published,
+  language,
 }: PostContentProps) {
   const [showAlert, setShowAlert] = useState(true);
-  
- 
 
   const parsedContent = useMemo(() => {
     const options: HTMLReactParserOptions = {
@@ -53,7 +53,7 @@ export default function PostContent({
                 element.attribs["data-enlighter-language"]
               ) {
                 const additionalData = {}; // Replace with actual data as needed
-                return createPre(element,additionalData);
+                return createPre(element, additionalData);
               }
               break;
           }
@@ -64,21 +64,20 @@ export default function PostContent({
   }, [content]);
 
   const displayedTitle = useMemo(() => {
-    return { __html : title };
+    return { __html: title };
   }, [title]);
 
-
- 
+  let postlang = "Deutsch";
+  if (language === "en") {
+    postlang = "Englisch";
+  }
 
   return (
     <>
       <h2 dangerouslySetInnerHTML={displayedTitle} />
       <p className="">
-        Verfasst in:  /{" "}
-        Veröffentlicht am: {published} /{" "}
-        Lesezeit:{" "}
-        {Math.ceil(content.split(" ").length / 200)}{" "}
-        Minute(n)
+        Verfasst in: {postlang} / Veröffentlicht am: {published} / Lesezeit:{" "}
+        {Math.ceil(content.split(" ").length / 200)} Minute(n)
       </p>
       {parsedContent}
     </>

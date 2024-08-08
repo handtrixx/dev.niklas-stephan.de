@@ -40,7 +40,7 @@ export default function Page({ dir }) {
   return (
     <>
       <Head>
-        <title>Title</title>
+        <title>niklas-stephan.de - Homepage</title>
       </Head>
 
       <main dir={dir}>
