@@ -8,7 +8,6 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./index.module.css";
 import ColorToggleLink from "../color-toggle-link";
-import LanguageSelectionLink from "../language-selection-link";
 import { useState, useRef } from "react";
 import Tooltip from "react-bootstrap/Tooltip";
 import Overlay from "react-bootstrap/Overlay";

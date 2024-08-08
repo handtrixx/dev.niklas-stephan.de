@@ -47,7 +47,7 @@ export default function Page({ content = [] }) {
       <Container fluid={"xl"}>
         <Row>
           <Col>
-            <h1>translate("page.search.headline")</h1>
+            <h1>Suche.</h1>
           </Col>
         </Row>
         <Row>
@@ -59,7 +59,7 @@ export default function Page({ content = [] }) {
                 className="form-control form-control-lg form-control-search me-2"
                 type="text"
                 defaultValue={searchTerm}
-                placeholder="page.search.query"
+                placeholder="Suchbegriff eingeben"
                 aria-label="search term"
                 onKeyPress={(event) => {
                   if (event.key === "Enter") {
@@ -135,7 +135,7 @@ export default function Page({ content = [] }) {
               <Container fluid className="text-center mb-3 p-3">
                 <Row>
                   <div className="col-12 text-body-primary">
-                    <h5>translate("page.search.noResults")</h5>
+                    <h5>Leider nichts gefunden, versuche es gerne mit einem anderen Suchbegriff.</h5>
                   </div>
                 </Row>
               </Container>

@@ -89,7 +89,7 @@ export default function Post({
               title={title}
               content={content}
               published={postDate}
-              contentLang={lang}
+            
             />
           </div>
           <div className="col-12 col-lg-2 d-none d-lg-block">
@@ -97,7 +97,7 @@ export default function Post({
               <div className="fs-5">Inhalt</div>
               <PostNav
                 content={content}
-                contentLang={lang}
+        
               />
             </div>
           </div>

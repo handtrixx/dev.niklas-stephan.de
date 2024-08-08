@@ -25,11 +25,11 @@ export default function Custom404() {
       <Container fluid="lg" className="my-5">
         <Row>
           <Col className="text-center mt-5">
-            <h1>"404.content.headline"</h1>
-            <p className="mt-4">"404.content.text"</p>
+            <h1>404 - Ups!</h1>
+            <p className="mt-4">Die Seite, die du suchst, wurde nicht gefunden.</p>
             <Link  href={`/search/${term}`}>
                 <div className="btn btn-primary mt-5 fingerpaint">
-                   "404.content.search"
+                  Suche
                 </div>
             </Link>
           </Col>

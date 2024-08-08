@@ -5,7 +5,7 @@ import { Nav } from "react-bootstrap";
 import { ArrowUpCircle } from "react-bootstrap-icons";
 import { Node, Element as DomElement } from "domhandler";
 
-export default function PostNav({ content, translations, contentLang }) {
+export default function PostNav({ content }) {
   const [headlines, setHeadlines] = useState([]);
   const [activeKey, setActiveKey] = useState("");
 
@@ -39,7 +39,7 @@ export default function PostNav({ content, translations, contentLang }) {
     parse(content, options);
 
     setHeadlines(newHeadlines);
-  }, [content, translations, contentLang]);
+  }, [content]);
 
   useEffect(() => {
     const handleScroll = () => {

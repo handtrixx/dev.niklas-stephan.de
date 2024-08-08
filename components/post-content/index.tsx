@@ -10,17 +10,13 @@ import { createImage } from "../post-image";
 interface PostContentProps {
   title: string;
   content: string;
-  contentLang: string;
   published: string;
 }
 
 export default function PostContent({
   title,
   content,
-  contentLang,
   published,
-  translations,
-  translatedHeadlines,
 }: PostContentProps) {
   const [showAlert, setShowAlert] = useState(true);
   
@@ -56,7 +52,8 @@ export default function PostContent({
                 element.attribs &&
                 element.attribs["data-enlighter-language"]
               ) {
-                return createPre(element);
+                const additionalData = {}; // Replace with actual data as needed
+                return createPre(element,additionalData);
               }
               break;
           }
@@ -64,23 +61,20 @@ export default function PostContent({
       },
     };
     return parse(content, options);
-  }, [contentLang, content]);
+  }, [content]);
 
   const displayedTitle = useMemo(() => {
     return { __html : title };
-  }, [contentLang, translatedHeadlines, title]);
+  }, [title]);
 
 
-  let postLang = "Deutsch";
-  if (contentLang === "en") {
-    postLang = "Englisch";
-  }
+ 
 
   return (
     <>
       <h2 dangerouslySetInnerHTML={displayedTitle} />
       <p className="">
-        Verfasst in: {postLang} /{" "}
+        Verfasst in:  /{" "}
         Veröffentlicht am: {published} /{" "}
         Lesezeit:{" "}
         {Math.ceil(content.split(" ").length / 200)}{" "}
