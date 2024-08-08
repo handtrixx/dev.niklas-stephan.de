@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useIntl } from "react-intl";
 import { Nav } from "react-bootstrap";
 import Tooltip from "react-bootstrap/Tooltip";
 import Overlay from "react-bootstrap/Overlay";
 import { CircleHalf, Sun, MoonStars } from "react-bootstrap-icons";
 
 const ColorToggleLink = () => {
-  const intl = useIntl();
-  const translate = (id) => intl.formatMessage({ id });
   const [currentColorScheme, setCurrentColorScheme] = useState("light");
 
   useEffect(() => {
@@ -31,7 +28,7 @@ const ColorToggleLink = () => {
       <Nav.Link
         onClick={toggleColorScheme}
         ref={targetPopoverTheme}
-        aria-label="Change Theme"
+        aria-label="Ändere das Farbschema"
         onMouseEnter={togglePopoverTheme}
         onMouseLeave={togglePopoverTheme}
       >
@@ -43,7 +40,7 @@ const ColorToggleLink = () => {
         placement="bottom"
       >
         {(props) => (
-          <Tooltip {...props}>{translate("nav.links.popover.theme")}</Tooltip>
+          <Tooltip {...props}>Farbschema</Tooltip>
         )}
       </Overlay>
     </>

@@ -7,12 +7,9 @@ import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Heart as HeartIcon, CodeSlash as CodeSlashIcon } from "react-bootstrap-icons";
-import { FormattedMessage, useIntl } from "react-intl";
 
 
 export default function FooterNavigation() {
-  const intl = useIntl();
-  const translate = (id) => intl.formatMessage({ id });
   const router = useRouter();
   const isActive = (pathname) => (router.pathname === pathname ? "active" : "");
   return (
@@ -20,18 +17,18 @@ export default function FooterNavigation() {
       <Row>
         <Col className="d-flex justify-content-center">
           <Link href="/" className={`${isActive("/")} me-1 mx-lg-2 nav-link`}>
-            {translate("nav.links.home")}
+            Home
           </Link>
           |
           <Link href="/blog" className={`nav-link me-1 mx-lg-2 ${isActive("/blog")}`}>
-            {translate("nav.links.projects")}
+            Projekte & Blog
           </Link>
           |
           <Link
             href="/page/privacy"
             className={`${isActive("/privacy")} nav-link me-1 mx-lg-2`}
           >
-            {translate("nav.links.privacy")}
+              Datenschutzerklärung
           </Link>
         </Col>
       </Row>

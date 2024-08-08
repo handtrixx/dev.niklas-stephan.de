@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import parse, { HTMLReactParserOptions } from "html-react-parser";
-import { useIntl } from "react-intl";
 import styles from "./index.module.css";
 import { Nav } from "react-bootstrap";
 import { ArrowUpCircle } from "react-bootstrap-icons";
@@ -8,8 +7,6 @@ import { Node, Element as DomElement } from "domhandler";
 
 export default function PostNav({ content, translations, contentLang }) {
   const [headlines, setHeadlines] = useState([]);
-  const intl = useIntl();
-  const translate = (id) => intl.formatMessage({ id });
   const [activeKey, setActiveKey] = useState("");
 
   useEffect(() => {
@@ -39,25 +36,10 @@ export default function PostNav({ content, translations, contentLang }) {
       },
     };
 
-    switch (contentLang) {
-      case "en":
-        if (intl.locale === "en") {
-          parse(content, options);
-        } else {
-          parse(translations, options);
-        }
-        break;
-      default:
-        if (intl.locale === "de") {
-          parse(content, options);
-        } else {
-          parse(translations, options);
-        }
-        break;
-    }
+    parse(content, options);
 
     setHeadlines(newHeadlines);
-  }, [content, translations, intl.locale, contentLang]);
+  }, [content, translations, contentLang]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -104,8 +86,8 @@ export default function PostNav({ content, translations, contentLang }) {
           className={`${styles.navIcon} nav-link text-decoration-none`}
           href="#"
         >
-          <ArrowUpCircle className="me-1"/>
-          {translate("post.navigation.backToTop")}
+          <ArrowUpCircle className="me-1" />
+          Nach Oben
         </a>
       </div>
     </small>

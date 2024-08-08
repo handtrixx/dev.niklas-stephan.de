@@ -1,5 +1,4 @@
 import { useEffect, useMemo } from "react";
-import { IntlProvider } from "react-intl";
 import { AppProps } from "next/app";
 import Cookies from "js-cookie";
 import { parseCookies } from "nookies";
@@ -8,32 +7,22 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import CookieBanner from "../components/cookie-banner";
 import { LocaleProvider, useLocale } from "../components/context-locale";
-import '../styles/globals.scss'
-import en from "../i18n/en.json";
-import de from "../i18n/de.json";
+import '../styles/globals.scss';
 import { frontendHost, frontendUrl } from "../utils/env.js";
 
-const messages = {
-  de,
-  en,
-};
+
 
 function MyApp({
   Component,
-  pageProps,
-  initialLocale,
-}: AppProps & { initialLocale: string }) {
+  pageProps
+}: AppProps & {}) {
   return (
-    <LocaleProvider initialLocale={initialLocale}>
+  
       <MyAppInner Component={Component} pageProps={pageProps} />
-    </LocaleProvider>
+
   );
 }
 
-MyApp.getInitialProps = async ({ ctx }) => {
-  const { locale } = parseCookies(ctx);
-  return { initialLocale: locale || "de" };
-};
 
 function SEO({ locale, description }) {
   const openGraph = useMemo(
@@ -72,29 +61,11 @@ function SEO({ locale, description }) {
 }
 
 function MyAppInner({ Component, pageProps }) {
-  const { locale, setLocale } = useLocale();
-
-  useEffect(() => {
-    const storedLocale = Cookies.get("locale");
-    if (storedLocale && storedLocale in messages) {
-      setLocale(storedLocale);
-    }
-  }, [setLocale]);
-
-  // Set the cookie outside of the useEffect hook
-  Cookies.set("locale", locale, {
-    sameSite: "Lax",
-    secure: true,
-    path: "/",
-  });
-  const description =
-    locale === "en"
-      ? "All about web development, IoT, DevOps and more."
-      : "Alles rund um Webentwicklung, IoT, DevOps und mehr.";
+  const description = "All about web development, IoT, DevOps and more.";
 
   return (
-    <IntlProvider locale={locale} messages={messages[locale]}>
-      <SEO locale={locale} description={description} />
+    <>
+      <SEO locale="de" description={description} />
       <Head>
         <link rel="icon" href={frontendUrl + "images/favicon.png"} />
         <meta
@@ -119,7 +90,7 @@ function MyAppInner({ Component, pageProps }) {
       </Head>
       <Component {...pageProps} />
       <CookieBanner />
-    </IntlProvider>
+  </>
   );
 }
 

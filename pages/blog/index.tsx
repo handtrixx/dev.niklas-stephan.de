@@ -11,7 +11,6 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
 import { CalendarWeekFill, Translate, Search } from "react-bootstrap-icons";
-import { FormattedMessage, useIntl } from "react-intl";
 import PostTeaser from "../../components/post-teaser";
 import TopNavigation from "../../components/top-navigation";
 import FooterNavigation from "../../components/footer-navigation";
@@ -19,8 +18,6 @@ import { NextSeo } from "next-seo";
 import { frontendHost, frontendUrl, backendHost, backendUrl } from '../../utils/env.js';
 
 export default function Index({ allPosts: { posts } }) {
-  const intl = useIntl();
-  const translate = (id) => intl.formatMessage({ id });
   const router = useRouter();
 
   // Add a state for the filter
@@ -109,9 +106,9 @@ export default function Index({ allPosts: { posts } }) {
                 type="text"
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
-                placeholder={translate("page.blog.button.filter")}
-                aria-label="Username"
-                aria-describedby="basic-addon1"
+                placeholder="Beiträge filtern"
+                aria-label="filtern"
+                aria-describedby="filter1"
               />
               <div className="form-label align-self-center">
                 <CalendarWeekFill size={18} />
@@ -122,10 +119,10 @@ export default function Index({ allPosts: { posts } }) {
                 id="input-sorting-dropdown-1"
               >
                 <Dropdown.Item onClick={() => setSortOrder("desc")}>
-                  Desc
+                  desc
                 </Dropdown.Item>
                 <Dropdown.Item onClick={() => setSortOrder("asc")}>
-                  Asc
+                  asc
                 </Dropdown.Item>
               </DropdownButton>
             </div>
@@ -140,12 +137,12 @@ export default function Index({ allPosts: { posts } }) {
           ) : (
             <Col className="text-center vh-100">
               <h4 className="mt-5">
-                <FormattedMessage id="page.blog.noPostsFound" /> {filter}
+                Keine Beiträge gefunden zu: {filter}
               </h4>
               <h5 className="mt-5">
                 <Link href={"/search/" + filter}>
                   <Button className="fingerpaint">
-                    <FormattedMessage id="page.blog.searchLink" />
+                    Starte Detailsuche
                   </Button>
                 </Link>
               </h5>

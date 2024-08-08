@@ -1,12 +1,9 @@
-import { FormattedMessage, useIntl } from "react-intl";
 import Link from "next/link";
 
 export default function TreeHobbies() {
-  const intl = useIntl();
-  const translate = (id) => intl.formatMessage({ id });
   return (
     <div className="py-5">
-      <h1 className="display-1 text-center">#HOBBYS</h1>
+      <h1 className="display-1 text-center">#HOBBIES</h1>
       <div className="d-flex align-items-center justify-content-center mt-3">
         <div className="vr"></div>
       </div>
@@ -17,8 +14,8 @@ export default function TreeHobbies() {
         <div className="vr vr-timeline"></div>
       </div>
       <div className="text-center">
-        <div className="fs-5">{translate("page.home.headlines.readingBelleristic")}</div>
-        <div>{translate("page.home.content.readingBelleristic")}</div>
+        <div className="fs-5">Lesen - Belleristik</div>
+        <div>Science Fiction, Fantasy, Krimis, Thriller, Romane</div>
       </div>
       <div className="d-flex align-items-center justify-content-center">
         <div className="vr"></div>
@@ -30,8 +27,8 @@ export default function TreeHobbies() {
         <div className="vr"></div>
       </div>
       <div className="text-center">
-        <div className="fs-5">{translate("page.home.headlines.nonFiction")}</div>
-        <div>{translate("page.home.content.nonFiction")}</div>
+        <div className="fs-5">Lesen - Fachliteratur</div>
+        <div>Psychologie, Philosophie, Geschichte, Astronomie, Wirtschaft, IT, Webentwicklung</div>
       </div>
       <div className="d-flex align-items-center justify-content-center">
         <div className="vr"></div>
@@ -43,8 +40,8 @@ export default function TreeHobbies() {
         <div className="vr"></div>
       </div>
       <div className="text-center">
-        <div className="fs-5">{translate("page.home.headlines.hiking")}</div>
-        <div>{translate("page.home.content.hiking")}</div>
+        <div className="fs-5">Wandern, Laufen und Radfahren</div>
+        <div>Allein oder am liebsten zu zweit</div>
       </div>
       <div className="d-flex align-items-center justify-content-center">
         <div className="vr"></div>
@@ -56,8 +53,8 @@ export default function TreeHobbies() {
         <div className="vr"></div>
       </div>
       <div className="text-center">
-        <div className="fs-5">{translate("page.home.headlines.yoga")}</div>        
-        <div>{translate("page.home.content.yoga")}</div>
+        <div className="fs-5">Yoga und Sport</div>        
+        <div>Gegen die Schreibtischkrankheit</div>
       </div>
       <div className="d-flex align-items-center justify-content-center">
         <div className="vr"></div>
@@ -69,8 +66,8 @@ export default function TreeHobbies() {
         <div className="vr"></div>
       </div>
       <div className="text-center">
-        <div className="fs-5">{translate("page.home.headlines.guitar")}</div>
-        <div>{translate("page.home.content.guitar")}</div>
+        <div className="fs-5">Gitarrenspiel und Musikproduktion</div>
+        <div>Leider (noch) nicht gut genug zum Teilen</div>
       </div>
       <div className="d-flex align-items-center justify-content-center">
         <div className="vr"></div>
@@ -82,8 +79,8 @@ export default function TreeHobbies() {
         <div className="vr"></div>
       </div>
       <div className="text-center">
-        <div className="fs-5">{translate("page.home.headlines.coding")}</div>
-        <div>{translate("page.home.content.coding")}</div>
+        <div className="fs-5">Programmieren und IT Maker Projekte</div>
+        <div>Kleine und große Projekte, von der Webseite bis zum IoT</div>
       </div>
       <div className="text-center pt-5">
         <Link
@@ -91,7 +88,7 @@ export default function TreeHobbies() {
           href="/blog"
           role="button"
         >
-          {translate("page.home.button.toBlog")}
+          Mehr im Blog!
         </Link>      
       </div>
     </div>

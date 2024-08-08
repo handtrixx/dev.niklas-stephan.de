@@ -1,6 +1,5 @@
 import { frontendHost, frontendUrl, backendUrl } from "../../utils/env.js";
 import { useState, useRef } from "react";
-import { useIntl } from "react-intl";
 import { Overlay, Tooltip } from "react-bootstrap";
 import { Facebook, Twitter, Linkedin, EnvelopeFill, Whatsapp } from "react-bootstrap-icons";
 import styles from "./index.module.css";
@@ -16,8 +15,6 @@ const SocialIcon = ({
 }) => {
   const [showPopover, setShowPopover] = useState(false);
   const targetPopover = useRef(null);
-  const intl = useIntl();
-  const translate = (id) => intl.formatMessage({ id });
   const pageurl = frontendUrl + "posts/" + slug.slug;
   const href = url
     .replace("{pageurl}", pageurl)
@@ -43,7 +40,7 @@ const SocialIcon = ({
         show={showPopover}
         placement="bottom"
       >
-        {(props) => <Tooltip {...props}>{translate(tooltipId)}</Tooltip>}
+        {(props) => <Tooltip {...props}>{tooltipId}</Tooltip>}
       </Overlay>
     </>
   );
@@ -58,7 +55,7 @@ export function SocialIcons(slug, decodedTitle) {
         decodedTitle={decodedTitle}
         socialNetwork="facebook"
         IconComponent={Facebook}
-        tooltipId="post.tooltip.facebook"
+        tooltipId="Auf Facebook teilen"
         url="https://www.facebook.com/sharer/sharer.php?u={pageurl}&amp;src=sdkpreparse"
       />
       <SocialIcon
@@ -67,7 +64,7 @@ export function SocialIcons(slug, decodedTitle) {
         decodedTitle={decodedTitle}
         socialNetwork="twitter"
         IconComponent={Twitter}
-        tooltipId="post.tooltip.twitter"
+        tooltipId="Auf X (Twitter) teilen"
         url="https://twitter.com/intent/tweet?text={pageurl}"
       />
       <SocialIcon
@@ -76,7 +73,7 @@ export function SocialIcons(slug, decodedTitle) {
         decodedTitle={decodedTitle}
         socialNetwork="linkedin"
         IconComponent={Linkedin}
-        tooltipId="post.tooltip.linkedin"
+        tooltipId="Auf LinkedIn teilen"
         url="https://www.linkedin.com/shareArticle?mini=false&url={pageurl}"
       />
       <SocialIcon
@@ -85,7 +82,7 @@ export function SocialIcons(slug, decodedTitle) {
         decodedTitle={decodedTitle}
         socialNetwork="mail"
         IconComponent={EnvelopeFill}
-        tooltipId="post.tooltip.mail"
+        tooltipId="Per E-Mail teilen"
         url="mailto:?subject={decodedTitle}&body={pageurl}"
       />
       <SocialIcon
@@ -94,7 +91,7 @@ export function SocialIcons(slug, decodedTitle) {
         decodedTitle={decodedTitle}
         socialNetwork="whatsapp"
         IconComponent={Whatsapp}
-        tooltipId="post.tooltip.whatsapp"
+        tooltipId="Auf WhatsApp teilen"
         url="https://wa.me/?text={pageurl}"
       />
     </>

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
@@ -26,15 +25,12 @@ import {
 
 export default function Page({ content = [] }) {
   const router = useRouter();
-  const intl = useIntl();
   const [filter, setFilter] = useState("");
   const [filteredContent, setFilteredContent] = useState([]);
   const searchTerm = Array.isArray(router.query.term)
     ? router.query.term.join("/")
     : router.query.term || "";
 
-  // Define a helper function to translate messages
-  const translate = (id) => intl.formatMessage({ id });
 
   useEffect(() => {
     // Filter posts and pages when `filter` state changes
@@ -51,7 +47,7 @@ export default function Page({ content = [] }) {
       <Container fluid={"xl"}>
         <Row>
           <Col>
-            <h1>{translate("page.search.headline")}</h1>
+            <h1>translate("page.search.headline")</h1>
           </Col>
         </Row>
         <Row>
@@ -63,7 +59,7 @@ export default function Page({ content = [] }) {
                 className="form-control form-control-lg form-control-search me-2"
                 type="text"
                 defaultValue={searchTerm}
-                placeholder={translate("page.search.query")}
+                placeholder="page.search.query"
                 aria-label="search term"
                 onKeyPress={(event) => {
                   if (event.key === "Enter") {
@@ -139,7 +135,7 @@ export default function Page({ content = [] }) {
               <Container fluid className="text-center mb-3 p-3">
                 <Row>
                   <div className="col-12 text-body-primary">
-                    <h5>{translate("page.search.noResults")}</h5>
+                    <h5>translate("page.search.noResults")</h5>
                   </div>
                 </Row>
               </Container>

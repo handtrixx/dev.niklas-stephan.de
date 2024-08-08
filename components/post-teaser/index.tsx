@@ -1,7 +1,6 @@
 // Import necessary libraries
 import { useRouter } from "next/router";
 import styles from "./index.module.css";
-import { useIntl } from "react-intl";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useMemo } from "react";
@@ -14,20 +13,24 @@ import {
   ChevronDown,
 } from "react-bootstrap-icons";
 
-// Define date formats as constants
-const DATE_FORMAT = "yyyy/MM/dd";
-const DATE_FORMAT_DE = "dd.MM.yyyy";
-
 // Define the PostTeaser component
 export default function PostTeaser({ post }) {
-  // Use the useIntl hook to get the internationalization functions
-  const intl = useIntl();
+  switch (post.lang) {
+    case "de":
+      post.lang = "de";
+      break;
+    case "en":
+      post.lang = "en";
+      break;
+    default:
+      post.lang = "de";
+  }
 
   // Use the useState hook to manage the expanded state of the post
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Determine the date format based on the locale
-  const dateFormat = intl.locale === "de" ? DATE_FORMAT_DE : DATE_FORMAT;
+  const dateFormat = "dd.MM.yyyy";
 
   const postDate = useMemo(
     () => format(new Date(post.date), dateFormat),
@@ -61,13 +64,23 @@ export default function PostTeaser({ post }) {
 
         <Link href={`/posts/${post.slug}`}>
           <div className={styles["image-wrapper"]}>
-            <Image
-              src={post.imageUrl}
-              alt={post.imageAlt}
-              width={post.imageWidth}
-              height={post.imageHeight}
-              className={styles["image-blog"]}
-            />
+            {post.imageUrl ? (
+              <Image
+                src={post.imageUrl}
+                alt={post.imageAlt}
+                width={post.imageWidth}
+                height={post.imageHeight}
+                className={styles["image-blog"]}
+              />
+            ) : (
+              <Image
+                src="/images/n.png"
+                alt="Logo niklas-stephan.de"
+                width="150"
+                height="150"
+                className={styles["image-blog"]}
+              />
+            )}
           </div>
         </Link>
         <div className="pt-3 px-2">

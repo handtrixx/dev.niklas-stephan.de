@@ -1,8 +1,4 @@
-import { FormattedMessage, useIntl } from "react-intl";
-
 export default function TreeTrivia() {
-  const intl = useIntl();
-  const translate = (id) => intl.formatMessage({ id });
   return (
     <div className="py-5">
       <h1 className="display-1 text-center">#TRIVIA</h1>
@@ -16,9 +12,8 @@ export default function TreeTrivia() {
         <div className="vr"></div>
       </div>
       <div className="text-center">
-        <div className="fs-5">{translate("page.home.headlines.languages")}</div>        
-        <div>{translate("page.home.content.languages")}</div>
-
+        <div className="fs-5">Sprachen</div>        
+        <div>Deutsch, Englisch, JavaScript, SQL, HTML, CSS, TypeScript, PHP, Python</div>
       </div>
       <div className="d-flex align-items-center justify-content-center">
         <div className="vr"></div>
@@ -30,8 +25,8 @@ export default function TreeTrivia() {
         <div className="vr"></div>
       </div>
       <div className="text-center">
-        <div className="fs-5">{translate("page.home.headlines.drivingLicenses")}</div>
-        <div>{translate("page.home.content.drivingLicenses")}</div>
+        <div className="fs-5">Fahrerlaubnis</div>
+        <div>Klasse B, öffentlicher Nah- und Fernverkehr :-)</div>
       </div>
       <div className="d-flex align-items-center justify-content-center">
         <div className="vr"></div>
@@ -43,8 +38,8 @@ export default function TreeTrivia() {
         <div className="vr"></div>
       </div>
       <div className="text-center">
-        <div className="fs-5">{translate("page.home.headlines.certificates")}</div>        
-        <div>{translate("page.home.content.certificates")}</div>
+        <div className="fs-5">Zertifikate</div>        
+        <div>Vielfältige Zertifikate aus dem Bereich Projektmanagement, eBusiness, IT und Webentwicklung</div>
       </div>
     </div>
   );

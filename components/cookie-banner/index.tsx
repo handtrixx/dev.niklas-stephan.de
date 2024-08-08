@@ -1,17 +1,14 @@
 import { useRouter } from "next/router";
 import CookieConsent from "react-cookie-consent";
-import { useIntl } from "react-intl";
 import Link from "next/link";
 
 const CookieBanner = () => {
-  const intl = useIntl();
-  const translate = (id) => intl.formatMessage({ id });
   const router = useRouter();
 
   return (
     <CookieConsent
       location="bottom"
-      buttonText={intl.formatMessage({ id: "cookie.banner.button" })}
+      buttonText="Verstanden" 
       cookieName="CookieConsent"
       style={{ background: "#2B373B" }}
       buttonStyle={{
@@ -23,10 +20,11 @@ const CookieBanner = () => {
       expires={150}
     >
       <small>
-        {intl.formatMessage({ id: "cookie.banner.text" })}{" "}
+        Um Dir ein optimales Erlebnis zu bieten, verwende ich einen sogenannten Cookie, um Deine bevorzugte Sprache für Dich zu speichern.  Außerdem nutze ich einen Cookie um Deine Entscheidung diesen Dialog auszublenden zu speichern. Weitere Cookies für sogenannte Web Analytics oder andere nicht 
+        essenzielle Zwecke werden von mir nicht eingesetzt. Weitere Informationen dazu findest Du in meiner&nbsp;
         <Link href="/page/privacy" className="text-white underline">
-          {intl.formatMessage({ id: "cookie.banner.link" })}
-        </Link>
+           Datenschutzerklärung
+        </Link> . 
       </small>
     </CookieConsent>
   );

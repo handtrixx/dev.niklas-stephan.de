@@ -1,4 +1,3 @@
-import { FormattedMessage, useIntl } from "react-intl";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -15,8 +14,6 @@ import Tooltip from "react-bootstrap/Tooltip";
 import Overlay from "react-bootstrap/Overlay";
 
 export default function TopNavigation() {
-  const intl = useIntl();
-  const translate = (id) => intl.formatMessage({ id });
   const router = useRouter();
   const isActive = (pathname) => (router.pathname === pathname ? "active" : "");
   const [showPopoverBacktoHome, setShowPopoverBacktoHome] = useState(false);
@@ -60,14 +57,13 @@ export default function TopNavigation() {
           >
             {(props) => (
               <Tooltip {...props}>
-                {translate("nav.links.popover.backtohome")}
+               Zurück zur Startseite
               </Tooltip>
             )}
           </Overlay>
 
           <div className="ms-auto d-flex order-sm-1">
             <div className="ms-sm-4"></div>
-            <LanguageSelectionLink />
             <ColorToggleLink />
             <Link
               href="/search"
@@ -86,7 +82,7 @@ export default function TopNavigation() {
             >
               {(props) => (
                 <Tooltip {...props}>
-                  {translate("nav.links.popover.search")}
+                  Suche
                 </Tooltip>
               )}
             </Overlay>
@@ -98,16 +94,16 @@ export default function TopNavigation() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <Link href="/" className={`nav-link ${isActive("/")}`}>
-                {translate("nav.links.home")}
+                Home
               </Link>
               <Link href="/blog" className={`nav-link ${isActive("/blog")}`}>
-                {translate("nav.links.projects")}
+               Projekte
               </Link>
               <Link
                 href="/#contactsection"
                 className={`nav-link ${isActive("/#contactsection")}`}
               >
-                {translate("nav.links.contact")}
+                Kontakt
               </Link>
             </Nav>
           </Navbar.Collapse>

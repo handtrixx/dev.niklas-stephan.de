@@ -9,7 +9,6 @@ import {
   ChevronDown,
   ChevronRight,
 } from "react-bootstrap-icons";
-import { useIntl } from "react-intl";
 import Head from "next/head";
 import TopNavigation from "../components/top-navigation";
 import FooterNavigation from "../components/footer-navigation";
@@ -37,15 +36,11 @@ const CustomImage = ({ src, alt, priority = false }) => (
 );
 
 export default function Page({ dir }) {
-  const intl = useIntl();
-
-  // Define a function to translate text
-  const translate = (id) => intl.formatMessage({ id });
 
   return (
     <>
       <Head>
-        <title>{translate(TITLE_ID)}</title>
+        <title>Title</title>
       </Head>
 
       <main dir={dir}>
@@ -63,7 +58,7 @@ export default function Page({ dir }) {
               <Col md={6}>
                 <div className="text-center">
                   <h1 className="display-1">NIKLAS STEPHAN</h1>
-                  <h2 className="fs-3">Digital Architect and Creator</h2>
+                  <h2 className="fs-3">Data Innovation Architect</h2>
                 </div>
                 <Container fluid className="text-center px-0">
                   <a
@@ -73,7 +68,7 @@ export default function Page({ dir }) {
                   >
                     <ChevronDown />
                     <span className="ms-1 fingerpaint text-shadow">
-                      {translate("page.home.button.readMore")}
+                      Mehr über mich
                     </span>
                   </a>
                   <Link
@@ -83,7 +78,7 @@ export default function Page({ dir }) {
                   >
                     <ChevronRight />
                     <span className="ms-1 fingerpaint text-shadow">
-                      {translate("page.home.button.toblog")}
+                      Projekte
                     </span>
                   </Link>
                 </Container>
@@ -135,7 +130,7 @@ export default function Page({ dir }) {
               <Col sm={{ span: 8 }} md={{ span: 6 }} id="contactsection">
                 <div className="py-5">
                   <h1 className="display-1 text-center">
-                    {translate("page.home.headlines.contact")}
+                   Kontakt
                   </h1>
                   <div className="card mt-5">
                     <div className="card-body pb-0">
@@ -151,13 +146,13 @@ export default function Page({ dir }) {
                             <div className="fs-4 card-title">
                               Niklas Stephan
                             </div>
-                            <p>Data Architect and Creator</p>
+                            <p>Data Innovation Architect</p>
 
                             <p className="card-text pt-3">
                               <a
                                 className="text-decoration-none"
                                 href="mailto:
-                                mail@somewhere.com"
+                                mail@niklas-stephan.de"
                               >
                                 <EnvelopeFill />
                                 <span className="ms-2">

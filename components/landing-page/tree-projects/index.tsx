@@ -4,7 +4,7 @@ import Badge from "react-bootstrap/Badge";
 export default function treeProjects() {
   return (
     <div className="py-5">
-      <h1 className="display-1 text-center">#PROJECTS</h1>
+      <h1 className="display-1 text-center">#PROJEKTE</h1>
       <div className="d-flex align-items-center justify-content-center mt-3">
         <div className="vr"></div>
       </div>

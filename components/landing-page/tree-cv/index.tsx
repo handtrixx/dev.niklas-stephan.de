@@ -4,10 +4,10 @@ export default function treeCV() {
       <h1 className="display-1 text-center fingerPaint">#CV</h1>
       <div className="text-center mt-3">
         <div className="fs-5">
-          Lead Project A.I. in Markekting, Sales & Customer Services
+          Senior Data Architect
         </div>
         <div>
-          Global Marketing &amp; Sales Services @{" "}
+          Data Intelligence & Data Innovation @{" "}
           <a href="https://bbraun.com" target="_blank">
             B. Braun SE
           </a>

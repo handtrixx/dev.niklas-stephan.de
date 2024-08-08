@@ -5,24 +5,17 @@ import hljs from "highlight.js";
 import { Button, Modal, Overlay } from "react-bootstrap";
 import { ClipboardPlus, ArrowsFullscreen } from "react-bootstrap-icons";
 import "highlight.js/styles/atom-one-dark.css"; // Import the style you want to use
-import english from "../../i18n/en.json";
-import german from "../../i18n/de.json";
 import styles from "./index.module.css";
 
 const showModal = (locale) => {
   const modal = document.createElement("div");
   document.body.appendChild(modal);
   const root = ReactDOM.createRoot(modal);
-  let copyConfirmation = "";
-  if (locale === "en") {
-    copyConfirmation = english["post.button.copyConfirmation"];
-  } else {
-    copyConfirmation = german["post.button.copyConfirmation"];
-  }
+
   root.render(
     <Modal show={true} onHide={() => root.unmount()}>
       <Modal.Header closeButton className="border-0">
-        {copyConfirmation}
+      Link kopiert!
       </Modal.Header>
     </Modal>
   );

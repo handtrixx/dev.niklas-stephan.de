@@ -1,7 +1,6 @@
 // Import necessary modules from their respective packages
 import { useContext } from "react";
 import Head from "next/head";
-import { useIntl } from "react-intl";
 import TopNavigation from "../../components/top-navigation";
 import FooterNavigation from "../../components/footer-navigation";
 import StylesContext from "../../components/context-styles";
@@ -18,10 +17,6 @@ import {
 export default function Page({ title, content, slug }) {
   const gutenberg = useContext(StylesContext);
   // Use the internationalization hook from react-intl
-  const intl = useIntl();
-
-  // Helper function to translate text
-  const translate = (id) => intl.formatMessage({ id });
 
   const decodedTitle = he.decode(title);
   const pagetitle = decodedTitle + " - " + frontendHost;
