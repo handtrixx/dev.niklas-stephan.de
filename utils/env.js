@@ -1,31 +1,22 @@
-// env.js
+const url = require("url");
 
-function validateUrl(url) {
-  if (!url) {
-    throw new Error('The URL '+url+' is not set in the environment variables');
-  }
-  let validatedUrl;
-  try {
-    validatedUrl = new URL(url);
-  } catch (err) {
-    throw new Error(`The URL ${url} is not valid`);
-  }
-  return validatedUrl;
-}
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const parsedApiUrl = url.parse(apiUrl);
+const apiProtocol = parsedApiUrl.protocol.slice(0, -1);
+const apiHost = parsedApiUrl.host;
+const apiToken = process.env.API_TOKEN;
 
-const backendUrl = validateUrl(process.env.BACKEND_URL);
-const backendProtocol = backendUrl.protocol.slice(0, -1);
-const backendHost = backendUrl.host;
-
-const frontendUrl = validateUrl(process.env.FRONTEND_URL);
-const frontendProtocol = frontendUrl.protocol.slice(0, -1);
-const frontendHost = frontendUrl.host;
+const frontendUrl = "https://dev.niklas-stephan.de";
+const parsedFrontendUrl = url.parse(frontendUrl);
+const frontendProtocol = parsedFrontendUrl.protocol.slice(0, -1);
+const frontendHost = parsedFrontendUrl.host;
 
 module.exports = {
-  backendUrl,
-  backendProtocol,
-  backendHost,
+  apiUrl,
+  apiProtocol,
+  apiHost,
+  apiToken,
   frontendUrl,
   frontendProtocol,
-  frontendHost
+  frontendHost,
 };

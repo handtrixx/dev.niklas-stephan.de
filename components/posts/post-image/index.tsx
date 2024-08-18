@@ -21,8 +21,8 @@ export function createImage(element, isLink = false) {
   function cleanImg(img) {
     if (img.attribs?.src) {
       const {
-        width = "100px",
-        height = "100px",
+        width = "400",
+        height = "400",
         alt = "niklas-stephan.de",
         src,
       } = img.attribs;

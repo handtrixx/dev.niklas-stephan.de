@@ -3,4 +3,5 @@ node_modules/
 apiCache/translations/
 package-lock.json
 docker-compose.yml
+.env.local
 node_modules

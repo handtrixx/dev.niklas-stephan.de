@@ -6,37 +6,26 @@ import { DefaultSeo } from "next-seo";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import CookieBanner from "../components/cookie-banner";
-import { LocaleProvider, useLocale } from "../components/context-locale";
-import '../styles/globals.scss';
-import { frontendHost, frontendUrl } from "../utils/env.js";
+import "../styles/globals.scss";
+import env from "../utils/env";
 
-
-
-function MyApp({
-  Component,
-  pageProps
-}: AppProps & {}) {
-  return (
-  
-      <MyAppInner Component={Component} pageProps={pageProps} />
-
-  );
+function MyApp({ Component, pageProps }: AppProps & {}) {
+  return <MyAppInner Component={Component} pageProps={pageProps} />;
 }
-
 
 function SEO({ locale, description }) {
   const openGraph = useMemo(
     () => ({
       type: "website",
       locale: locale,
-      url: frontendUrl.toString(),
-      site_name: frontendHost,
+      url: env.frontendUrl,
+      site_name: env.frontendHost,
       images: [
         {
-          url: frontendUrl + "images/screenshot.jpg",
+          url: env.frontendUrl + "images/screenshot.jpg",
           width: 800,
           height: 600,
-          alt: frontendHost,
+          alt: env.frontendHost,
         },
       ],
     }),
@@ -52,7 +41,7 @@ function SEO({ locale, description }) {
 
   return (
     <DefaultSeo
-      title={frontendHost}
+      title={env.frontendHost}
       description={description}
       openGraph={openGraph}
       twitter={twitter}
@@ -67,19 +56,19 @@ function MyAppInner({ Component, pageProps }) {
     <>
       <SEO locale="de" description={description} />
       <Head>
-        <link rel="icon" href={frontendUrl + "images/favicon.png"} />
+        <link rel="icon" href={env.frontendUrl + "images/favicon.png"} />
         <meta
           name="msapplication-TileImage"
-          content={frontendUrl + "images/favicon.png"}
+          content={env.frontendUrl + "images/favicon.png"}
         />
         <link
           rel="apple-touch-icon-precomposed"
-          href={frontendUrl + "images/favicon.png"}
+          href={env.frontendUrl + "images/favicon.png"}
           type="image/png"
         />
         <link
           rel="icon"
-          href={frontendUrl + "images/favicon.png"}
+          href={env.frontendUrl + "images/favicon.png"}
           type="image/png"
           sizes="120x120"
         />
@@ -90,7 +79,7 @@ function MyAppInner({ Component, pageProps }) {
       </Head>
       <Component {...pageProps} />
       <CookieBanner />
-  </>
+    </>
   );
 }
 

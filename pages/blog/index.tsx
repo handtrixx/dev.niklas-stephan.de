@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { GetStaticProps } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import { NextSeo } from "next-seo";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -10,16 +12,64 @@ import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
-import { CalendarWeekFill, Translate, Search } from "react-bootstrap-icons";
-import PostTeaser from "../../components/post-teaser";
+import {
+  CalendarWeekFill,
+  Translate,
+  Search,
+  Bookmark,
+  ChevronUp,
+  ChevronDown,
+} from "react-bootstrap-icons";
+import { format } from "date-fns";
 import TopNavigation from "../../components/top-navigation";
 import FooterNavigation from "../../components/footer-navigation";
-import { NextSeo } from "next-seo";
-import { frontendHost, frontendUrl, backendHost, backendUrl } from '../../utils/env.js';
+import env from "../../utils/env";
+import styles from "./index.module.css";
+
+
+
+export const getStaticProps: GetStaticProps = async () => {
+  try {
+    const res = await fetch(env.apiUrl + `/wp-json/babelnext/v1/posts`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Api-Token": env.apiToken,
+      },
+    });
+    const page = await res.json();
+
+    const posts = await Promise.all(
+      page.map(async (element) => {
+        return {
+          slug: element.slug,
+          title: element.title,
+          lang: "en",
+          date: element.date,
+          modified: element.modified,
+          excerpt: element.excerpt,
+          categories: element.categories,
+          imageUrl: element.imageUrl,
+          imageAlt: element.slug,
+          imageWidth: 400,
+          imageHeight: 400,
+        };
+      })
+    );
+    return {
+      props: { allPosts: { posts } },
+      revalidate: 10,
+    };
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return {
+      props: { allPosts: { posts: [] } },
+      revalidate: 10,
+    };
+  }
+};
 
 export default function Index({ allPosts: { posts } }) {
   const router = useRouter();
-
   // Add a state for the filter
   const [filter, setFilter] = useState("");
   const [languageFilter, setLanguageFilter] = useState("");
@@ -50,14 +100,14 @@ export default function Index({ allPosts: { posts } }) {
       )
     );
   }, [filter, languageFilter, sortOrder, posts]);
-
   const languageShow = languageFilter === "" ? "de+en" : languageFilter;
   const sortOrderShow = sortOrder === "" ? "desc" : sortOrder;
+  const title = "Blog - " + env.frontendHost;
+  const description = "Blog auf " + env.frontendHost;
+  const pageurl = env.frontendUrl + "/blog";
 
-  const title = "Blog - "+frontendHost;
-  const description = "Blog auf "+frontendHost;
-  const pageurl = frontendUrl+"/blog";
 
+ 
   return (
     <>
       <NextSeo
@@ -66,14 +116,14 @@ export default function Index({ allPosts: { posts } }) {
         openGraph={{
           url: pageurl,
           title: title,
-          description: description
+          description: description,
         }}
       />
       <TopNavigation />
       <Container fluid={"xl"}>
         <Row className="mb-4">
           <Col>
-            <h1 >Blog.</h1>
+            <h1>Blog.</h1>
           </Col>
         </Row>
         <Row className="mb-3">
@@ -131,19 +181,15 @@ export default function Index({ allPosts: { posts } }) {
         </Row>
         <Row>
           {filteredPosts.length > 0 ? (
-            filteredPosts.map((post, index) => (
+            filteredPosts.map((post, index) => (         
               <PostTeaser key={index} post={post} />
             ))
           ) : (
             <Col className="text-center vh-100">
-              <h4 className="mt-5">
-                Keine Beiträge gefunden zu: {filter}
-              </h4>
+              <h4 className="mt-5">Keine Beiträge gefunden zu: {filter}</h4>
               <h5 className="mt-5">
                 <Link href={"/search/" + filter}>
-                  <Button className="fingerpaint">
-                    Starte Detailsuche
-                  </Button>
+                  <Button className="fingerpaint">Starte Detailsuche</Button>
                 </Link>
               </h5>
             </Col>
@@ -155,52 +201,74 @@ export default function Index({ allPosts: { posts } }) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const allPosts = await getAllPostsForHome();
-  return {
-    props: { allPosts },
-    revalidate: 10,
-  };
-};
 
-async function getAllPostsForHome() {
-  try {
-    const res = await fetch(
-      backendUrl+`/wp-json/wp/v2/posts?per_page=100`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const page = await res.json();
 
-    const posts = await Promise.all(
-      page.map(async (element) => {
-       // console.log(frontendUrl+"images/screenshot.jpg");
+function PostTeaser({ post }) {
 
-        const imageUrl = element.featured_image_url;
-        return {
-          id: element.id,
-          slug: element.slug,
-          title: element.title.rendered,
-          lang: element.lang,
-          date: element.date,
-          modified: element.modified,
-          excerpt: element.excerpt.rendered,
-          featured_media: element.featured_media,
-          categories: element.categories,
-          imageUrl: imageUrl,
-          imageAlt: element.slug,
-          imageWidth: 400,
-          imageHeight: 400,
-        };
-      })
-    );
-    return { posts: posts };
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    // You can decide how to handle the error here. For example, you might want to return an empty array of posts:
-    return { posts: [] };
-  }
+  const [isExpanded, setIsExpanded] = useState(false);
+  const dateFormat = "dd.MM.yyyy";
+  const postDate = useMemo(() => format(new Date(post.date), dateFormat), [post.date, dateFormat]);
+  const toggleExpanded = () => setIsExpanded((prev) => !prev);
+
+  return (
+    <div key={post.id} className="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+      <div className="bg-light-subtle shadow-sm py-2">
+        <div className="pb-3 px-2">
+          <div className="container-fluid ">
+            <Link href={`/posts/${post.slug}`} className="text-decoration-none">
+              <div className="row">
+                <div className="col-2 px-0">
+                  <Bookmark className="fs-2 text-primary" />
+                </div>
+                <div className="col-10 px-0">
+                  <span className="d-block text-body-primary" dangerouslySetInnerHTML={{ __html: post.title }} />
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        <Link href={`/posts/${post.slug}`}>
+          <div className={styles["image-wrapper"]}>
+            {post.imageUrl ? (
+              <Image
+                src={post.imageUrl}
+                alt={post.imageAlt}
+                width={post.imageWidth}
+                height={post.imageHeight}
+                className={styles["image-blog"]}
+              />
+            ) : (
+              <Image
+                src="/images/n.png"
+                alt="Logo niklas-stephan.de"
+                width="150"
+                height="150"
+                className={styles["image-blog"]}
+              />
+            )}
+          </div>
+        </Link>
+        <div className="pt-3 px-2">
+          <div
+            className={`text-body-secondary ${styles["excerpt"]} ${isExpanded ? styles["excerpt-expanded"] : ""}`}
+            dangerouslySetInnerHTML={{ __html: post.excerpt }}
+          />
+          <div className="d-flex mt-2 align-items-center">
+            <small className="mx-2 text-body-secondary">
+              <Translate className="me-1" />
+              {post.lang}
+            </small>
+            <small className="mx-2 text-body-secondary">
+              <CalendarWeekFill className="me-1" />
+              {postDate}
+            </small>
+            <div className="ms-auto btn btn-sm btn-outline-primary rounded-4 border-2" onClick={toggleExpanded}>
+              {isExpanded ? <ChevronUp /> : <ChevronDown />}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -16,13 +16,9 @@ import {
 import TopNavigation from "../../components/top-navigation";
 import FooterNavigation from "../../components/footer-navigation";
 import styles from "./search.module.css";
-import {
-  frontendHost,
-  frontendUrl,
-  backendHost,
-  backendUrl,
-} from "../../utils/env.js";
+import env from "../../utils/env";
 
+const backendUrl = env.apiUrl;
 export default function Page({ content = [] }) {
   const router = useRouter();
   const [filter, setFilter] = useState("");

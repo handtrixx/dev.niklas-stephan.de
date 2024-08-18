@@ -1,17 +1,12 @@
 const {
-  backendProtocol,
-  backendHost,
+  apiProtocol,
+  apiHost,
   frontendProtocol,
   frontendHost,
 } = require("./utils/env");
 
-
 /** @type {import('next').NextConfig} */
 module.exports = {
-  env: {
-    BACKEND_URL: process.env.BACKEND_URL,
-    FRONTEND_URL: process.env.FRONTEND_URL,
-  },
   reactStrictMode: true,
   i18n: {
     locales: ["de", "en"],
@@ -22,8 +17,8 @@ module.exports = {
     loader: "default",
     remotePatterns: [
       {
-        protocol: backendProtocol,
-        hostname: backendHost,
+        protocol: apiProtocol,
+        hostname: apiHost,
         pathname: "/**",
       },
       {

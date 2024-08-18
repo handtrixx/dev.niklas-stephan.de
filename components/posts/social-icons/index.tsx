@@ -1,4 +1,4 @@
-import { frontendHost, frontendUrl, backendUrl } from "../../utils/env.js";
+import { frontendHost, frontendUrl } from "../../../utils/env.js";
 import { useState, useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
 import { Facebook, Twitter, Linkedin, EnvelopeFill, Whatsapp } from "react-bootstrap-icons";
